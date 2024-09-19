@@ -1,0 +1,81 @@
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-wrap: wrap;
+    background-color: #212529 !important;
+    color: #FFFFFF !important;
+}
+
+.main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40vh;
+    min-width: 75vw;
+}
+
+.main div{
+    text-align: center;
+}
+
+.result{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 40vh;
+    min-width: 75vw;
+}
+
+.macros{
+    display: flex;
+}
+
+.foodImg{
+    min-width: 240px;
+}
+
+.foodImg img{
+    width: 200px;
+    height: 200px;
+    margin: 10px;
+}
+
+.foodImg svg{
+    width: 200px;
+    height: 200px;
+    margin: 10px;
+}
+
+@keyframes fadeInUp {
+    0% {
+      transform: translateY(100%);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0%);
+      opacity: 1;
+    }
+  }
+  
+  .fadeInUp-animation {
+    animation: 1.5s fadeInUp;
+  }
+
+/*Gradual fade in*/
+  .p {
+    opacity: 0; /* Initially hidden */
+    transition: opacity 1s ease-in-out; /* Fade in effect */
+  }
+
+  /* Animation for the first div */
+  .fade-in-1 {
+    animation: fadeInUp 1s ease-in forwards;
+  }
+
+  /* Animation for the second div with delay */
+  .fade-in-2 {
+    animation: fadeInUp 1s ease-in forwards 1.5s; /* 2s delay */
+  }
