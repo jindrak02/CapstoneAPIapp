@@ -11,37 +11,72 @@
 <body>
         <div class="result" style="width: 100vw;">
             <div class="macros p fade-in-1">
+              <% if (locals.error) { %>
+               <h3>Food not found, please try another food</h3>
+              <% } else if(locals.data && locals.macros){ %>
                 <div class="foodImg">
-                    <img class="rounded" src=<%= data.photo.thumb %> alt="foodImg">
+                  <img class="rounded" src=<%= data.photo.thumb %> alt="foodImg">
                 </div>
                     <table class="table " style="--bs-table-bg: #212529; --bs-table-color: #FFFFFF;">
                         <tbody>
                           <tr>
                             <td><b><%= data.food_name %></b></td>
-                            <td></td>
+                            <td><%= macros.serving_qty %> <%= macros.serving_unit %>, <%= macros.serving_weight_grams %> g</td>
                           </tr>
                           <tr>
                             <td>Proteins</td>
-                            <td>-</td>
+                            <td>
+                              <% if (macros.nf_protein != null) { %>
+                                <%= macros.nf_protein %>
+                              <% } else {%>
+                                0
+                              <% } %>
+                            </td>
                           </tr>
                           <tr>
                             <td>Carbohydrates</td>
-                            <td>-</td>
+                            <td>
+                              <% if (macros.nf_total_carbohydrate != null) { %>
+                                <%= macros.nf_total_carbohydrate %>
+                              <% } else {%>
+                                0
+                              <% } %>
+                            </td>
                           </tr>
                           <tr>
                             <td>Sugars</td>
-                            <td>-</td>
+                            <td>
+                              <% if (macros.nf_sugars != null) { %>
+                                <%= macros.nf_sugars %>
+                              <% } else {%>
+                                0
+                              <% } %>
+                            </td>
                           </tr>
                           <tr>
                             <td>Fat</td>
-                            <td>-</td>
+                            <td>
+                              <% if (macros.nf_total_fat != null) { %>
+                                <%= macros.nf_total_fat %>
+                              <% } else {%>
+                                0
+                              <% } %>
+                            </td>
                           </tr>
                           <tr>
                             <td>Fiber</td>
-                            <td>-</td>
+                            <td>
+                              <% if (macros.nf_dietary_fiber != null) { %>
+                                <%= macros.nf_dietary_fiber %>
+                              <% } else {%>
+                                0
+                              <% } %>
+                            </td>
                           </tr>
                         </tbody>
                     </table>
+              <% } %>
+                
             </div>
             <form class="row g-3 mt-4 p fade-in-2" action="/get-macros" method="post">
                 <div class="col-auto">

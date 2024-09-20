@@ -23,18 +23,22 @@ app.post("/get-macros", async (req, res) => {
         'method': 'GET',
         'headers': {
             //'Content-Type': 'application/json',
-            'x-app-id': "dedf6377",
-            'x-app-key': "51a722122b583a5da8ff881242c254ec"
+            'x-app-id': appId,
+            'x-app-key': appKey
         }
+    }
+
+    const body = {
+        'query': req.body.food
     }
 
     try {
         const response = await axios.get("https://trackapi.nutritionix.com/v2/search/instant/?query=" + req.body.food, config);
-        console.log(response.data.common[0]);
-        console.log(req.body.food);
-        res.render("result.ejs", { data: response.data.common[0] });
+        const macros = await axios.post("https://trackapi.nutritionix.com/v2/natural/nutrients", body, config);
+        res.render("result.ejs", { data: response.data.common[0], macros: macros.data.foods[0] });
     } catch (error) {
-        res.status(404).send(error.response.data);
+        console.log(error.response.data.message);
+        res.render("result.ejs", { error: error.response.data.message });
     }
 });
 
